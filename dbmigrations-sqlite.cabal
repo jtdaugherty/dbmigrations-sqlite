@@ -42,7 +42,7 @@ Executable moo-sqlite
   default-language: Haskell2010
   Build-Depends:
     base >= 4 && < 5,
-    dbmigrations,
+    dbmigrations >= 2,
     HDBC-sqlite3
 
   if impl(ghc >= 6.12.0)
@@ -53,3 +53,26 @@ Executable moo-sqlite
 
   Hs-Source-Dirs:  programs
   Main-is:         MooSQLite.hs
+
+test-suite dbmigrations-sqlite-tests
+  default-language: Haskell2010
+  type: exitcode-stdio-1.0
+  Build-Depends:
+    base >= 4 && < 5,
+    dbmigrations >= 2,
+    HDBC >= 2.2.1,
+    HDBC-sqlite3 == 2.3.3.1,
+    HUnit >= 1.2
+
+  other-modules:
+    BackendTest
+    TestDriver
+
+  if impl(ghc >= 6.12.0)
+    ghc-options: -threaded -Wall -fwarn-tabs -funbox-strict-fields
+                 -fno-warn-unused-do-bind -Wwarn
+  else
+    ghc-options: -threaded -Wall -fwarn-tabs -funbox-strict-fields
+
+  Hs-Source-Dirs:  test
+  Main-is:         TestDriver.hs

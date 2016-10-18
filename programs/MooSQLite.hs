@@ -5,7 +5,7 @@ where
 
 import Database.HDBC.Sqlite3 (connectSqlite3)
 import Prelude  hiding (lookup)
-import System.Environment (getArgs, setEnv)
+import System.Environment (getArgs)
 import System.Exit
 
 import Database.Schema.Migrations.Backend.HDBC (hdbcBackend)
