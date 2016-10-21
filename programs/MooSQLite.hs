@@ -8,6 +8,7 @@ import Prelude  hiding (lookup)
 import System.Environment (getArgs)
 import System.Exit
 
+import Database.Schema.Migrations.Backend (DatabaseType(SQLite))
 import Database.Schema.Migrations.Backend.HDBC (hdbcBackend)
 import Moo.Core
 import Moo.Main
@@ -23,7 +24,7 @@ main = do
     Right conf -> do
       let connectionString = _connectionString conf
       connection <- connectSqlite3 connectionString
-      let backend = hdbcBackend connection
+      let backend = hdbcBackend SQLite connection
           parameters = makeParameters conf backend
       mainWithParameters args parameters
 
